@@ -26,15 +26,17 @@ public class hw4 {
 			inputs.add(match.group(2));
 		}
 
-		for(int j = 0; j < 60; j ++) {
+		int last_time = times.peekLast() + 21;
+
+		for(int j = 0; j <= last_time; j ++) {
 			if(times.peekFirst() != null && j == times.peekFirst()) {
 				times.removeFirst();
 				i.set(inputs.removeFirst());
 			}
 
 			try {
-				m.Delta();
 				m.Lambda();
+				m.Delta();
 				if(o.available()) {
 					System.out.println("Time is " + j);
 					System.out.println(o.get());
