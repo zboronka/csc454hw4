@@ -1,3 +1,8 @@
+import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.regex.Matcher; 
+import java.util.regex.Pattern;
+
 public class hw4 {
 	public static void main(String[] args) {
 		Port<String> i = new Port<>();
@@ -6,17 +11,25 @@ public class hw4 {
 		VendingMachine m = new VendingMachine(0,0,0,0);
 		m.addInput(i);
 		m.addOutput(o);
-		i.set("q");
+
+		Scanner sc = new Scanner(System.in);
+		String trajectory = sc.nextLine();
+
+		Pattern p = Pattern.compile("\\((\\d),([qdn])\\)");
+		Matcher match = p.matcher(trajectory);
+
+		LinkedList<Integer> times = new LinkedList<>();
+		LinkedList<String> inputs = new LinkedList<>();
+
+		while(match.find()) {
+			times.add(Integer.parseInt(match.group(1)));
+			inputs.add(match.group(2));
+		}
+
 		for(int j = 0; j < 60; j ++) {
-			switch(j) {
-				case 1: case 2: case 3:
-					i.set("q");
-					break;
-				case 4: case 5: case 6:
-					i.set("d");
-					break;
-				default:
-					break;
+			if(times.peekFirst() != null && j == times.peekFirst()) {
+				times.removeFirst();
+				i.set(inputs.removeFirst());
 			}
 
 			try {
@@ -26,8 +39,7 @@ public class hw4 {
 					System.out.println("Time is " + j);
 					System.out.println(o.get());
 				}
-			}
-			catch(NoChangeException e) {
+			} catch(NoChangeException e) {
 				System.out.println(e.getMessage());
 				break;
 			}

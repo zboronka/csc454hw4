@@ -81,7 +81,6 @@ public class VendingMachine {
 
 	private void deltaint() throws NoChangeException {
 		Pattern p = Pattern.compile("<(\\w*)>");
-
 		Matcher change = p.matcher(getChange(value % 100));
 
 		while(change.find()) {
