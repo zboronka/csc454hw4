@@ -15,7 +15,7 @@ public class hw4 {
 		Scanner sc = new Scanner(System.in);
 		String trajectory = sc.nextLine();
 
-		Pattern p = Pattern.compile("\\((\\d),([qdn])\\)");
+		Pattern p = Pattern.compile("\\((\\d*),([qdn])\\)");
 		Matcher match = p.matcher(trajectory);
 
 		LinkedList<Integer> times = new LinkedList<>();

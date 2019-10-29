@@ -40,17 +40,17 @@ public class VendingMachine {
 			if(input.available() && (e < ta() || ta() < 0)) {
 				deltaext(input.get());
 				time.advance(new TotalTime(0,1));
-				e = 0;
+				e = 1;
 			}
 			else if(input.available() && e == ta()) {
 				deltacon(input.get());
 				time.advance(new TotalTime(0,1));
-				e = 0;
+				e = 1;
 			}
 			else if(!input.available() && e == ta()) {
 				deltaint();
 				time.advance(new TotalTime(0,1));
-				e = 0;
+				e = 1;
 			}
 			else {
 				time.advance(new TotalTime(1,0));
